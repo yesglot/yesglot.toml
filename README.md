@@ -4,7 +4,32 @@ Yesglot is configured via a `yesglot.toml` file placed in the root of your Git r
 
 ---
 
-## Example
+## Minimal Example
+
+The simplest possible configuration — one source language, one target language:
+
+```toml
+[yesglot]
+version = 1
+
+[project]
+id = "proj_abc123"
+technology = "react-i18next"
+
+[source_language]
+name = "en"
+path = "src/locales/en/translation.json"
+
+[[target_language]]
+name = "tr"
+path = "src/locales/tr/translation.json"
+```
+
+---
+
+## Advanced Example
+
+Full configuration with multiple target languages, custom prompts, and glossaries:
 
 ```toml
 [yesglot]
@@ -30,6 +55,10 @@ name = "fr"
 path = "src/locales/fr/translation.json"
 custom_prompt = "Use vous. This market is enterprise."
 
+[[target_language]]
+name = "de"
+path = "src/locales/de/translation.json"
+
 [glossary.tr]
 "Like"    = "Beğen"
 "Follow"  = "Takip et"
@@ -41,6 +70,13 @@ custom_prompt = "Use vous. This market is enterprise."
 "Like"    = "J'aime"
 "Follow"  = "Suivre"
 "Explore" = "Explorer"
+"Reel"    = "Reel"
+"Story"   = "Story"
+
+[glossary.de]
+"Like"    = "Gefällt mir"
+"Follow"  = "Folgen"
+"Explore" = "Entdecken"
 "Reel"    = "Reel"
 "Story"   = "Story"
 ```
