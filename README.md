@@ -23,10 +23,12 @@ path = "src/locales/en/translation.json"
 [[target_language]]
 name = "tr"
 path = "src/locales/tr/translation.json"
+custom_prompt = "Use informal second person (sen, not siz)."
 
 [[target_language]]
 name = "fr"
 path = "src/locales/fr/translation.json"
+custom_prompt = "Use vous. This market is enterprise."
 
 [glossary.tr]
 "Like"    = "Beğen"
@@ -41,6 +43,12 @@ path = "src/locales/fr/translation.json"
 "Explore" = "Explorer"
 "Reel"    = "Reel"
 "Story"   = "Story"
+```
+
+In this example, the translation agent for Turkish receives:
+
+```
+"This is a SaaS product for developers. Use informal tone. Use informal second person (sen, not siz)."
 ```
 
 ---
@@ -60,7 +68,7 @@ path = "src/locales/fr/translation.json"
 | `id` | Yes | Your Yesglot project ID. Generated during project creation. **Never change this.** |
 | `technology` | Yes | The i18n framework used. See supported values below. |
 | `tracked_branch` | No | The branch Yesglot watches for changes. Defaults to your repository's default branch. |
-| `custom_prompt` | No | Extra instructions for the translation agent (tone, style, domain context). |
+| `custom_prompt` | No | Extra instructions applied to all target languages. |
 
 ### `[source_language]`
 
@@ -79,12 +87,13 @@ Repeat this block for each language you want to translate into.
 |---|---|---|
 | `name` | Yes | BCP 47 language tag (e.g. `tr`, `fr`, `de`). |
 | `path` | Yes | Path to the target translation file, relative to the repo root. |
+| `custom_prompt` | No | Extra instructions specific to this language. Appended after `project.custom_prompt`. |
 
 ### `[glossary.{lang}]`
 
 Optional. A key-value map of enforced translations for a specific target language. The language code must match a declared `[[target_language]]` name.
 
-Use this to ensure specific terms are always translated consistently, or to protect terms that should never be translated (by mapping them to themselves).
+Use this to ensure specific terms are always translated consistently, or to protect terms that should never be translated by mapping them to themselves.
 
 ```toml
 [glossary.tr]
@@ -144,5 +153,5 @@ path = "locale/fr/LC_MESSAGES/django.po"
 - Language tags must be valid [BCP 47](https://www.rfc-editor.org/rfc/rfc5646) codes (e.g. `en`, `tr`, `zh-Hans`).
 - All paths are relative to the repository root and must not start with `/`.
 - `tracked_branch` is optional — if omitted, Yesglot uses your repository's default branch.
-- `custom_prompt` is optional but recommended — the more context you give, the more accurate the translations.
+- `target_language.custom_prompt` is appended after `project.custom_prompt` — both are sent to the agent together.
 - Every key in `[glossary.{lang}]` must match a declared `[[target_language]]` name.
