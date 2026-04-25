@@ -4,6 +4,22 @@ Yesglot is configured via a `yesglot.toml` file placed in the root of your Git r
 
 ---
 
+## Table of Contents
+
+- [Minimal Example](#minimal-example)
+- [Advanced Example](#advanced-example)
+- [Fields](#fields)
+  - [[yesglot]](#yesglot)
+  - [[project]](#project)
+  - [[source_language]](#source_language)
+  - [[[target_language]]](#target_language)
+  - [[glossary.{lang}]](#glossarylang)
+- [Supported Technologies](#supported-technologies)
+- [How it works](#how-it-works)
+- [Notes](#notes)
+
+---
+
 ## Minimal Example
 
 The simplest possible configuration — one source language, one target language:
