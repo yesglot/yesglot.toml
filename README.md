@@ -27,6 +27,20 @@ path = "src/locales/tr/translation.json"
 [[target_language]]
 name = "fr"
 path = "src/locales/fr/translation.json"
+
+[glossary.tr]
+"Like"    = "Beğen"
+"Follow"  = "Takip et"
+"Explore" = "Keşfet"
+"Reel"    = "Reel"
+"Story"   = "Story"
+
+[glossary.fr]
+"Like"    = "J'aime"
+"Follow"  = "Suivre"
+"Explore" = "Explorer"
+"Reel"    = "Reel"
+"Story"   = "Story"
 ```
 
 ---
@@ -66,6 +80,18 @@ Repeat this block for each language you want to translate into.
 | `name` | Yes | BCP 47 language tag (e.g. `tr`, `fr`, `de`). |
 | `path` | Yes | Path to the target translation file, relative to the repo root. |
 
+### `[glossary.{lang}]`
+
+Optional. A key-value map of enforced translations for a specific target language. The language code must match a declared `[[target_language]]` name.
+
+Use this to ensure specific terms are always translated consistently, or to protect terms that should never be translated (by mapping them to themselves).
+
+```toml
+[glossary.tr]
+"Like"  = "Beğen"   # enforced translation
+"Reel"  = "Reel"    # protected — never translate
+```
+
 ---
 
 ## Supported Technologies
@@ -73,11 +99,11 @@ Repeat this block for each language you want to translate into.
 | Value | Framework | `source_language.path` |
 |---|---|---|
 | `react-i18next` | React with i18next | Required |
-| `django` | Django i18n (.po files) | Not supported — source strings live in the codebase |
+| `django` | Django i18n (.po files) | Not supported — source strings live in the target language files as `msgid` |
 | `rails` | Ruby on Rails i18n (.yml files) | Required |
 | `laravel` | Laravel localization (.php files) | Required |
 | `vue-i18n` | Vue with vue-i18n | Required |
-| `angular` | Angular with @angular/localize | Not supported — source strings live in the codebase |
+| `angular` | Angular with @angular/localize | Not supported — source strings live in the target language files as translation units |
 
 ### Example — Django (no `source_language.path`)
 
@@ -119,3 +145,4 @@ path = "locale/fr/LC_MESSAGES/django.po"
 - All paths are relative to the repository root and must not start with `/`.
 - `tracked_branch` is optional — if omitted, Yesglot uses your repository's default branch.
 - `custom_prompt` is optional but recommended — the more context you give, the more accurate the translations.
+- Every key in `[glossary.{lang}]` must match a declared `[[target_language]]` name.
