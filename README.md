@@ -33,11 +33,11 @@ id = "proj_abc123"
 technology = "react-i18next"
 
 [source_language]
-name = "en"
+tag = "en"
 path = "src/locales/en/translation.json"
 
 [[target_language]]
-name = "tr"
+tag = "tr"
 path = "src/locales/tr/translation.json"
 ```
 
@@ -58,21 +58,21 @@ tracked_branch = "main"
 custom_prompt = "This is a SaaS product for developers. Use informal tone."
 
 [source_language]
-name = "en"
+tag = "en"
 path = "src/locales/en/translation.json"
 
 [[target_language]]
-name = "tr"
+tag = "tr"
 path = "src/locales/tr/translation.json"
 custom_prompt = "Use informal second person (sen, not siz)."
 
 [[target_language]]
-name = "fr"
+tag = "fr"
 path = "src/locales/fr/translation.json"
 custom_prompt = "Use vous. This market is enterprise."
 
 [[target_language]]
-name = "de"
+tag = "de"
 path = "src/locales/de/translation.json"
 
 [glossary.tr]
@@ -128,7 +128,7 @@ The language your strings are written in.
 
 | Field | Required | Description |
 |---|---|---|
-| `name` | Yes | BCP 47 language tag (e.g. `en`, `fr`, `tr`). |
+| `tag` | Yes | BCP 47 language tag (e.g. `en`, `fr`, `tr`). |
 | `path` | Depends on technology | Path to the source translation file, relative to the repo root. See supported technologies below. |
 
 ### `[[target_language]]`
@@ -137,13 +137,13 @@ Repeat this block for each language you want to translate into.
 
 | Field | Required | Description |
 |---|---|---|
-| `name` | Yes | BCP 47 language tag (e.g. `tr`, `fr`, `de`). |
+| `tag` | Yes | BCP 47 language tag (e.g. `tr`, `fr`, `de`). |
 | `path` | Yes | Path to the target translation file, relative to the repo root. |
 | `custom_prompt` | No | Extra instructions specific to this language. Appended after `project.custom_prompt`. |
 
 ### `[glossary.{lang}]`
 
-Optional. A key-value map of enforced translations for a specific target language. The language code must match a declared `[[target_language]]` name.
+Optional. A key-value map of enforced translations for a specific target language. The language code must match a declared `[[target_language]]` tag.
 
 Use this to ensure specific terms are always translated consistently, or to protect terms that should never be translated by mapping them to themselves.
 
@@ -177,14 +177,14 @@ id = "proj_abc123"
 technology = "django"
 
 [source_language]
-name = "en"
+tag = "en"
 
 [[target_language]]
-name = "tr"
+tag = "tr"
 path = "locale/tr/LC_MESSAGES/django.po"
 
 [[target_language]]
-name = "fr"
+tag = "fr"
 path = "locale/fr/LC_MESSAGES/django.po"
 ```
 
@@ -206,4 +206,4 @@ path = "locale/fr/LC_MESSAGES/django.po"
 - All paths are relative to the repository root and must not start with `/`.
 - `tracked_branch` is optional — if omitted, Yesglot uses your repository's default branch.
 - `target_language.custom_prompt` is appended after `project.custom_prompt` — both are sent to the agent together.
-- Every key in `[glossary.{lang}]` must match a declared `[[target_language]]` name.
+- Every key in `[glossary.{lang}]` must match a declared `[[target_language]]` tag.
